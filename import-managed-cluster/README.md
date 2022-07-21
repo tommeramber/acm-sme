@@ -1,4 +1,4 @@
-###HUB Cluster Bastion Machine
+### HUB Cluster Bastion Machine
 
 ```bash
 cat > subscription-openshift-gitops.yaml << EOF
@@ -81,14 +81,14 @@ oc get secret mycluster-import \
 rsync -av import-mycluster <USER>@<Bastion-managed-cluster-url>:/tmp
 ```
 
-###Managed Cluster Bastion Machine
+### Managed Cluster Bastion Machine
 ```bash
 cd /tmp/import-mycluster
 oc apply -f import.yaml
 oc apply -f klusterlet-crd.yaml
 ```
 
-###HUB Cluster Bastion Machine
+### HUB Cluster Bastion Machine
 ```bash
 oc get managedcluster
 ```
