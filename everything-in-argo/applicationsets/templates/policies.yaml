@@ -1,3 +1,5 @@
+{{- range .Values.clusters }}
+{{- if .Values.clusters.requird }} 
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -6,10 +8,10 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: https://github.com/tommeramber/ArgoCD-GitOps-Helm-Based-Multi-Cluster-Structure.git
+      repoURL: https://github.com/tommeramber/acm-sme.git
       revision: HEAD
       directories:
-      - path: everything-in-argo/policies/
+      - path: everything-in-argo/policies/*
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
@@ -32,3 +34,5 @@ spec:
       #          prune: true
       #        syncOptions:
       #        - Replace=true
+{{- end }}
+{{- end }}

@@ -1,0 +1,7 @@
+clusters:
+  - name: acm
+    url: https://kubernetes.default.svc
+    required: true
+  - name: dev
+    url: https://api.cluster-86vnm.86vnm.sandbox828.opentlc.com:6443
+    required: false
