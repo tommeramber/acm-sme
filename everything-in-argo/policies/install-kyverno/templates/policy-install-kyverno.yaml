@@ -3,6 +3,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: policy-install-kyverno
+  namespace: acm-policies
   annotations:
     policy.open-cluster-management.io/standards: NIST-CSF
     policy.open-cluster-management.io/categories: CM Configuration Management
@@ -157,6 +158,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-policy-install-kyverno
+  namespace: acm-policies
 placementRef:
   name: placement-policy-install-kyverno
   kind: PlacementRule
@@ -170,6 +172,7 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   name: placement-policy-install-kyverno
+  namespace: acm-policies
 spec:
   clusterConditions:
     - status: 'True'
