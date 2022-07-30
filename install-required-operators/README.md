@@ -1,20 +1,5 @@
 ### Hub Cluster Bastion
+From `stolostron` GitHub project - [Link](https://github.com/stolostron/policy-collection) 
 ```bash
-cat > subscription-openshift-gitops.yaml << EOF
-apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  name: openshift-gitops-operator
-  namespace: openshift-operators
-spec:
-  channel: stable 
-  installPlanApproval: Automatic
-  name: openshift-gitops-operator 
-  source: redhat-operators 
-  sourceNamespace: openshift-marketplace
-EOF
-
-
-
-
+oc apply -f https://raw.githubusercontent.com/stolostron/policy-collection/main/community/CM-Configuration-Management/policy-install-kyverno.yaml
 ```
