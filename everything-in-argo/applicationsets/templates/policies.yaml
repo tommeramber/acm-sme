@@ -14,11 +14,14 @@ spec:
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
+    metadata:
+      name: '{{path.basename}}'
     spec:
       project: default
       source:
         repoURL: https://github.com/tommeramber/acm-sme.git
         targetRevision: HEAD
+        path: '{{path}}'
         helm:
           valueFiles:
           - {{ .name }}-values.yaml
