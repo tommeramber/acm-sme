@@ -31,11 +31,9 @@ spec:
         server: {{ .url }}
       syncPolicy:
         syncOptions:
-          - CreateNamespace=true 
-      # Operators
-      #        automated: 
-      #          prune: true
-      #        syncOptions:
-      #        - Replace=true
+          - CreateNamespace=true
+        automated:
+          prune: true
+          selfHeal: true
 {{- end }}
 {{- end }}
