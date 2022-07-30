@@ -29,7 +29,9 @@ spec:
           - {{ .name }}-values.yaml
       destination:
         server: {{ .url }}
-      syncPolicy: {}
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true 
       # Operators
       #        automated: 
       #          prune: true
