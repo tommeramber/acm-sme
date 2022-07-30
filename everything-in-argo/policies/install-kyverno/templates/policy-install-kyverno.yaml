@@ -181,8 +181,8 @@ spec:
       type: ManagedClusterConditionAvailable
   clusterSelector:
     matchExpressions:
-      - key: local-cluster
+      - key: managed-by-argo
         operator: In
         values:
-          - 'true'
+          - 'yes'
 {{- end }}
