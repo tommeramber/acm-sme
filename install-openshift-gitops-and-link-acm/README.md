@@ -84,4 +84,6 @@ spec:
 EOF
 
 oc apply -f gitospcluster.yaml
+echo https://`oc get route -n openshift-gitops | grep openshift-gitops-server | awk '{print $2}'`
+oc extract secret/openshift-gitops-cluster -n openshift-gitops  --to=-
 ```

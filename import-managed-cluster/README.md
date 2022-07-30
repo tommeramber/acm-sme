@@ -79,13 +79,17 @@ oc get secret mycluster-import \
   --decode > import-mycluster/import.yaml
   
 rsync -av import-mycluster <USER>@<Bastion-managed-cluster-url>:/tmp
+
+rm -rf import-mycluster
+
+
 ```
 
 ### Managed Cluster Bastion Machine
 ```bash
 cd /tmp/import-mycluster
-oc apply -f import.yaml
 oc apply -f klusterlet-crd.yaml
+oc apply -f import.yaml
 ```
 
 ### HUB Cluster Bastion Machine
