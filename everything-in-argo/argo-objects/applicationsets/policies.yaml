@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: policies 
+  namespace: openshift-gitops
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/tommeramber/ArgoCD-GitOps-Helm-Based-Multi-Cluster-Structure.git
+      revision: HEAD
+      directories:
+      - path: everything-in-argo/policies/
+  syncPolicy:
+    preserveResourcesOnDeletion: true
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/tommeramber/acm-sme.git
+        targetRevision: HEAD
+        path: '{{path}}'
+        helm:
+          valueFiles:
+          - values-dev-ocp.yaml
+      destination:
+        server: https://kubernetes.default.svc
+      syncPolicy: {}
+      # Operators
+      #        automated: 
+      #          prune: true
+      #        syncOptions:
+      #        - Replace=true
