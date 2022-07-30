@@ -1,4 +1,5 @@
 {{- range .Values.clusters }}
+{{- if .required }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -34,4 +35,5 @@ spec:
       #          prune: true
       #        syncOptions:
       #        - Replace=true
+{{- end }}
 {{- end }}
