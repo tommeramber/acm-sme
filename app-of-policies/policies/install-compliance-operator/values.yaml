@@ -1,0 +1,3 @@
+clusters:
+  key: install-compliance-operator-upstream
+  value: "yes"

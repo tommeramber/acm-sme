@@ -12,6 +12,13 @@ for i in $(oc get managedcluster -o name); do \
     oc label $i install-kyverno=yes --overwrite ; done
 
 ```
+#### To Install compliance Operator upstream on all managed clusters, run the following command:
+```bash 
+for i in $(oc get managedcluster -o name); do \
+    oc label $i install-compliance-operator-upstream=yes --overwrite ; done
+```
+
+
 
 ### Add one/some of the following labels to enforce policies on your cluster/s
 
