@@ -18,7 +18,7 @@ spec:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
         metadata:
-          name: enable-etcd-encryption
+          name: prevent-new-pod-without-always-pull-image
         spec:
           remediationAction: enforce
           severity: low
@@ -57,7 +57,7 @@ spec:
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
-  name: binding-policy-etcdencryption
+  name: binding-policy-always-pull-images
   namespace: acm-policies
 placementRef:
   name: placement-policy-always-pull-images
