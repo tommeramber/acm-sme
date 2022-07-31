@@ -10,8 +10,8 @@ spec:
       revision: HEAD
       directories:
       - path: app-of-policies/policies/*
-      - path: app-of-policies/policies/best-practices-enforced-by-acm/*
-      - path: app-of-policies/policies/best-practices-enforced-by-kyverno/*
+      - path: app-of-policies/best-practices-enforced-by-acm/*
+      - path: app-of-policies/best-practices-enforced-by-kyverno/*
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
