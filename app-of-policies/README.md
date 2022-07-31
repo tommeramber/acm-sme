@@ -17,6 +17,6 @@ for i in $(oc get managedcluster -o name); do \
 
 | Policy/Best Practice                                                                          | Label Key            | Label Value |
 | :------------                                                                                 |:--------------------:| :----:|  
-| [Encrypt Etcd](best-practices-enforced-by-acm/etcd-encryption)                       | etcd-encryption      | "yes" |
-| [Always Pull Images](best-practices-enforced-by-kyverno/always-pull-images)          | always-pull-images   | "yes" |
+| [Encrypt Etcd](policies/best-practices-enforced-by-acm/etcd-encryption)                       | etcd-encryption      | "yes" |
+| [Always Pull Images](policies/best-practices-enforced-by-kyverno/always-pull-images)          | always-pull-images   | "yes" |
 
