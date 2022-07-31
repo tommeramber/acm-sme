@@ -41,6 +41,7 @@ spec:
                       imagePullPolicy to Always. An alternative to the Kubernetes admission controller
                       AlwaysPullImages.      
                 spec:
+                  background: false
                   rules:
                   - name: always-pull-images
                     match:
