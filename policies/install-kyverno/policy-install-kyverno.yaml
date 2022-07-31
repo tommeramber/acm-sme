@@ -1,4 +1,3 @@
-{{- if .Values.required.kyverno }}
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
@@ -8,8 +7,6 @@ metadata:
     policy.open-cluster-management.io/standards: NIST-CSF
     policy.open-cluster-management.io/categories: CM Configuration Management
     policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
-    argocd.argoproj.io/compare-options: IgnoreExtraneous
-    argocd.argoproj.io/sync-options: Prune=false
 spec:
   remediationAction: enforce
   disabled: false
@@ -39,35 +36,7 @@ spec:
                 kind: Namespace
                 apiVersion: v1
                 metadata:
-                  name: kyverno-channel
-    - objectDefinition:
-        apiVersion: policy.open-cluster-management.io/v1
-        kind: ConfigurationPolicy
-        metadata:
-          name: policy-kyverno-privileged-scc
-        spec:
-          remediationAction: enforce
-          severity: low
-          namespaceSelector:
-            exclude:
-              - kube-*
-            include:
-              - default
-          object-templates:
-            - complianceType: musthave
-              objectDefinition:
-                apiVersion: rbac.authorization.k8s.io/v1
-                kind: ClusterRoleBinding
-                metadata:
-                  name: kyverno-privileged
-                roleRef:
-                 apiGroup: rbac.authorization.k8s.io
-                 kind: ClusterRole
-                 name: system:openshift:scc:privileged
-                subjects:
-                - kind: ServiceAccount
-                  name: kyverno
-                  namespace: kyverno
+                  name: security-channels
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
@@ -129,7 +98,7 @@ spec:
                     apps.open-cluster-management.io/reconcile-rate: medium
                 spec:
                   name: kyverno
-                  channel: kyverno-channel/kyverno
+                  channel: security-channels/kyverno
                   packageOverrides:
                     - packageAlias: kyverno
                       packageName: kyverno
@@ -168,7 +137,7 @@ spec:
                 spec:
                   clusterSelector:
                     matchExpressions:
-                      - key: managed-by-argo
+                      - key: install-kyverno
                         operator: In
                         values:
                         - 'yes'
@@ -180,7 +149,7 @@ spec:
                   annotations:
                     apps.open-cluster-management.io/reconcile-rate: medium
                   name: kyverno
-                  namespace: kyverno-channel
+                  namespace: security-channels
                 spec:
                   pathname: https://kyverno.github.io/kyverno
                   type: HelmRepo
@@ -210,9 +179,7 @@ spec:
       type: ManagedClusterConditionAvailable
   clusterSelector:
     matchExpressions:
-      - key: managed-by-argo
+      - key: local-cluster
         operator: In
         values:
-          - 'yes'
-{{- end }}
-
+          - 'true'

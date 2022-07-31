@@ -1,5 +1,0 @@
-required:
-  kyverno: true
-kyverno:
-  labels:
-    managed-by-argo: "yes"
