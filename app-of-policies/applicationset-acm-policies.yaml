@@ -14,7 +14,7 @@ spec:
       - path: app-of-policies/policies/best-practices-enforced-by-acm
         exclude: true
       - path: app-of-policies/policies/best-practices-enforced-by-kyverno/*
-      - path:  app-of-policies/policies/best-practices-enforced-by-kyverno
+      - path: app-of-policies/policies/best-practices-enforced-by-kyverno
         exclude: true
   syncPolicy:
     preserveResourcesOnDeletion: true
