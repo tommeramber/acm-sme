@@ -28,5 +28,4 @@ for i in $(oc get managedcluster -o name); do \
 | [Encrypt Etcd](policies/best-practices-enforced-by-acm/etcd-encryption)                       | etcd-encryption      | "yes" |
 | [Always Pull Images](policies/best-practices-enforced-by-kyverno/always-pull-images)          | always-pull-images   | "yes" |
 
-# Credits to the stolostron project that provided many policies [Link](https://github.com/stolostron/policy-collection:wq
-:)
+# Credits to the stolostron project that provided many policies [Link](https://github.com/stolostron/policy-collection)
