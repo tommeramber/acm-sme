@@ -1,0 +1,3 @@
+clusters:
+  key: always-pull-images
+  value: "yes"
