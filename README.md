@@ -14,6 +14,6 @@ sed -i 's,tag:,tag: v1.7.2-rc1,g' kyverno/values.yaml
 
 #### Run
 1. [import-managed-cluster](./import-managed-cluster)
-#2. [install-openshift-gitops-and-link-acm](./install-openshift-gitops-and-link-acm)
-3. [policies](./policies) 
+2. [install-openshift-gitops-and-link-acm](./install-openshift-gitops-and-link-acm)
+3. [app-of-policies](./app-of-policies) 
 

@@ -137,10 +137,10 @@ spec:
                 spec:
                   clusterSelector:
                     matchExpressions:
-                      - key: install-kyverno
+                      - key: {{ .Values.clusters.key }} 
                         operator: In
                         values:
-                        - 'yes'
+                        - {{ .Values.clusters.value | quote }}
             - complianceType: musthave
               objectDefinition:
                 apiVersion: apps.open-cluster-management.io/v1

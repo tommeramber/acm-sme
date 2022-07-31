@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: acm-policies
+  namespace: openshift-gitops
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/tommeramber/acm-sme.git
+      revision: HEAD
+      directories:
+      - path: app-of-policies/policies/*
+  syncPolicy:
+    preserveResourcesOnDeletion: true
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/tommeramber/acm-sme.git
+        targetRevision: HEAD
+        path: '{{path}}'
+        helm:
+          valueFiles:
+          - values.yaml
+      destination:
+        server: https://kubernetes.default.svc
+      syncPolicy: {}
