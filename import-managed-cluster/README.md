@@ -9,8 +9,6 @@ oc apply -f subscription-openshift-gitops.yaml
 ------------------------------------
 oc new-project mycluster
 
-oc label namespace mycluster cluster.open-cluster-management.io/managedCluster=mycluster
-
 oc apply -f managedcluster-and-klusterletaddonconfig.yaml -n mycluster
 
 # sed -i 's,mycluster,<NAME>,g' managedcluster-and-klusterletaddonconfig.yaml
