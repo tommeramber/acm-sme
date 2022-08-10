@@ -11,7 +11,7 @@ metadata:
     argocd.argoproj.io/sync-options: Prune=false
     argocd.argoproj.io/compare-options: IgnoreExtraneous
 spec:
-  remediationAction: {{.Values.remidiation}} 
+  remediationAction: {{ .Values.remidiation }} 
   disabled: false
   policy-templates:
     - objectDefinition:
@@ -38,7 +38,7 @@ spec:
         metadata:
           name: enable-etcd-encryption-status-kubeapi
         spec:
-          remediationAction: {{.Values.remidiation}}
+          remediationAction: {{ .Values.remidiation }}
           severity: low
           object-templates:
             - complianceType: musthave
