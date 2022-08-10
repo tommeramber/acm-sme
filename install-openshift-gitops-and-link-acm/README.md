@@ -19,6 +19,7 @@ for i in $(oc get managedcluster -o name); do \
 
 oc apply -f gitospcluster.yaml
 
+oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller
 echo https://`oc get route -n openshift-gitops | grep openshift-gitops-server | awk '{print $2}'`
 
 ```
