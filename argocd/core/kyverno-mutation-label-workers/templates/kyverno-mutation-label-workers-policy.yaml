@@ -29,7 +29,7 @@ spec:
                 metadata:
                   name: kyverno-mutation-label-workers
                   annotations:
-                    policies.kyverno.io/title: Always Pull Images
+                    policies.kyverno.io/title: Mutate Nodes
                     policies.kyverno.io/category: ConfigurationMangement
                     policies.kyverno.io/severity: medium
                     policies.kyverno.io/subject: Node
@@ -38,20 +38,24 @@ spec:
                   background: false
                   validationFailureAction: enforce #audit by default
                   rules:
-                    - name: newlabelworkers
+                    - name: labelworkers
                       match:
-                        any:
-                        - resources:
-                            kinds:
-                            - Node
-                            selector:
-                              matchLabels:
-                                node-role.kubernetes.io/worker: ''
-                      mutate:
-                        patchStrategicMerge:
-                          metadata:
-                            labels:
-                              +(awesome-gitops): "yes"
+                        resources:
+                          kinds:
+                          - Nodes
+                          selector:
+                            matchLabels:
+                              node-role.kubernetes.io/worker: ''
+                        mutate:
+                          patchesJson6902: |-
+                          [
+                            {
+                              "path": "/metadata/annotations/isMutated",
+                              "op": "add",
+                              "value": "true"
+                            }
+                          ]
+                            
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
