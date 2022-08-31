@@ -41,7 +41,7 @@ spec:
                     - name: labelworkers
                       match:
                         any:
-                          resources:
+                        - resources:
                             kinds:
                             - Nodes
                             selector:
