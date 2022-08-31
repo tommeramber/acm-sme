@@ -38,7 +38,7 @@ spec:
                   background: false
                   validationFailureAction: enforce #audit by default
                   rules:
-                    - name: label-workers
+                    - name: labelworkers
                       match:
                         any:
                         - resources:
