@@ -40,13 +40,12 @@ spec:
                   rules:
                     - name: labelworkers
                       match:
-                        any:
-                        - resources:
-                            kinds:
-                            - Nodes
-                            selector:
-                              matchLabels:
-                                node-role.kubernetes.io/worker: ''
+                        resources:
+                          kinds:
+                          - Node
+                          selector:
+                            matchLabels:
+                              node-role.kubernetes.io/worker: ''
                         mutate:
                           patchesJson6902: |-
                             [
