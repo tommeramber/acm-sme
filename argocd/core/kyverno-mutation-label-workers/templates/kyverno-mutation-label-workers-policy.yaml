@@ -40,12 +40,13 @@ spec:
                   rules:
                     - name: label-workers
                       match:
-                        resources:
-                          kinds:
+                        any:
+                        - resources:
+                            kinds:
                             - Node
-                          selector:
-                            matchLabels:
-                              node-role.kubernetes.io/worker: ''
+                            selector:
+                              matchLabels:
+                                node-role.kubernetes.io/worker: ''
                       mutate:
                         patchStrategicMerge:
                           metadata:
