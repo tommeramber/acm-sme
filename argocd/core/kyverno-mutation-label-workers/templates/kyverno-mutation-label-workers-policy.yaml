@@ -35,6 +35,7 @@ spec:
                     policies.kyverno.io/subject: Node
                 spec:
                   background: false
+                  validationFailureAction: enforce #audit by default
                   rules:
                     - name: label-workers
                       match:
