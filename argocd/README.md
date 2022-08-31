@@ -13,4 +13,8 @@ In such way we can use ArgoCD to hold all the ACM Policies that will configure t
 Each change we'll want to make on a remote cluster will be possiable only by changing the relevant ACM policy file in this Git repo (git commit + push); This operation will update the ArgoCD Application => that will update the ACM policy object on ACM => that will enforce the object's new configuration on the remote cluster, or on all the remote clusters if this policy is relevant for more than on cluster.
 
 
-Each Helm Chart (that hold ACM policies) is designed in such a way that we can decide, by giving a cluster a unique label associated with the Helm Chart, which clusters should be affected by it. 
+Each Helm Chart (that hold ACM policies) is designed in such a way that we can decide, by giving a cluster a unique label associated with the Helm Chart, which clusters should be affected by it.
+
+And Finaly, credits to the stolostron project that provided many ACM policies [Link](https://github.com/stolostron/policy-collection) that I've based my Helm Charts on for this solution.
+
+**NOTE!!** Some policies are dependent on `Kyverno` being installed on the remote cluster. Luckly there is an policy that installs Kyvenro on the remote cluster, it just needs to be labeled currectly, as can be seen in the demo.

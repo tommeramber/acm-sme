@@ -1,0 +1,81 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-kyverno-mutation-label-workers
+  namespace: gitops-demo
+  annotations:
+    policy.open-cluster-management.io/standards: Tommer
+    policy.open-cluster-management.io/categories: ConfigurationMangement
+    argocd.argoproj.io/sync-options: Prune=false
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+spec:
+  remediationAction: {{ .Values.remidiation }} 
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: kyverno-mutation-label-workers
+        spec:
+          remediationAction: inform # will be overridden by remediationAction in parent policy
+          severity: low
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: kyverno.io/v1
+                kind: ClusterPolicy
+                metadata:
+                  name: kyverno-mutation-label-workers
+                  annotations:
+                    policies.kyverno.io/title: Always Pull Images
+                    policies.kyverno.io/category: ConfigurationMangement
+                    policies.kyverno.io/severity: medium
+                    policies.kyverno.io/subject: Node
+                spec:
+                  background: false
+                  rules:
+                    - name: label-workers
+                      match:
+                        resources:
+                          kinds:
+                            - Node
+                          selector:
+                            matchLabels:
+                              node-role.kubernetes.io/worker: ''
+                      mutate:
+                        patchStrategicMerge:
+                          metadata:
+                            labels:
+                              node-role.kubernetes.io/awesome-gitops: ''
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: binding-policy-kyverno-mutation-label-workers
+  namespace: gitops-demo
+placementRef:
+  name: placement-policy-kyverno-mutation-label-workers
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: policy-kyverno-mutation-label-workers
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: placement-policy-kyverno-mutation-label-workers
+  namespace: gitops-demo
+spec:
+  clusterConditions:
+  - status: "True"
+    type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      - key: {{ .Values.clusters.key }}
+        operator: In
+        values: 
+        - {{ .Values.clusters.value | quote }}

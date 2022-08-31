@@ -1,0 +1,5 @@
+clusters:
+  key: kyverno-label-workers
+  value: "yes"
+remidiation: enforce
+
