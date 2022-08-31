@@ -77,7 +77,7 @@ spec:
     type: ManagedClusterConditionAvailable
   clusterSelector:
     matchExpressions:
-      - key: {{.Values.clusters.key}}
+      - key: {{ .Values.clusters.key }}
         operator: In
         values: 
-        - {{.Values.clusters.value | quote}}
+        - {{ .Values.clusters.value | quote }}

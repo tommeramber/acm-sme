@@ -10,6 +10,7 @@ spec:
       revision: HEAD
       directories:
       - path: argocd/core/*
+      - path: argocd/operators/*
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
@@ -25,5 +26,5 @@ spec:
           valueFiles:
           - values.yaml
       destination:
-        server: https://kubernetes.default.svc
+        server: https://kubernetes.default.svc #ACM!
       syncPolicy: {}
