@@ -46,15 +46,15 @@ spec:
                           selector:
                             matchLabels:
                               node-role.kubernetes.io/worker: ''
-                        mutate:
-                          patchesJson6902: |-
-                            [
-                              {
-                                "path": "/metadata/annotations/isMutated",
-                                "op": "add",
-                                "value": "true"
-                              }
-                            ]
+                      mutate:
+                        patchesJson6902: |-
+                          [
+                            {
+                              "path": "/metadata/annotations/isMutated",
+                              "op": "add",
+                              "value": "true"
+                            }
+                          ]
                             
 ---
 apiVersion: policy.open-cluster-management.io/v1
