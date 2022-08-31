@@ -1,0 +1,5 @@
+clusters:
+  key: etcd-encryption
+  value: "yes"
+remidiation: enforce
+
