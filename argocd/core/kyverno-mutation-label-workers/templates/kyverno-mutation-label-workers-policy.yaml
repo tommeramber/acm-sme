@@ -48,10 +48,10 @@ spec:
                               matchLabels:
                                 node-role.kubernetes.io/worker: ''
                       mutate:
-                        patchStrategicMerge:
-                          metadata:
-                            labels:
-                              awesome-gitops: ''
+                        patchesJson6902:
+                          - op: add
+                            path: "/metadata/labels"
+                            value: awesome-gitops='yes'
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
