@@ -27,35 +27,29 @@ spec:
                 apiVersion: kyverno.io/v1
                 kind: ClusterPolicy
                 metadata:
-                  name: kyverno-mutation-label-workers
-                  annotations:
-                    policies.kyverno.io/title: Mutate Nodes
-                    policies.kyverno.io/category: ConfigurationMangement
-                    policies.kyverno.io/severity: medium
-                    policies.kyverno.io/subject: Node
+                  name: label-nodes
                 spec:
                   mutateExistingOnPolicyUpdate: true
-                  background: false
-                  validationFailureAction: enforce #audit by default
+                  validationFailureAction: enforce
                   rules:
-                    - name: labelworkers
+                    - name: label-node
                       match:
-                        resources:
-                          kinds:
-                          - Node
-                          selector:
-                            matchLabels:
-                              node-role.kubernetes.io/worker: ''
+                        any:
+                        - resources:
+                            kinds:
+                            - Node
+                            selector:
+                              matchLabels:
+                                node-role.kubernetes.io/worker: ""
                       mutate:
-                        patchesJson6902: |-
-                          [
-                            {
-                              "path": "/metadata/annotations/isMutated",
-                              "op": "add",
-                              "value": "true"
-                            }
-                          ]
-                            
+                        targets:
+                        - apiVersion: v1
+                          kind: Node
+                          name: "{{ request.object.metadata.name }}"
+                        patchStrategicMerge:
+                          metadata:
+                            labels:
+                              wow: "yes"                            
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
